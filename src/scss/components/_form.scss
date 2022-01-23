@@ -1,0 +1,114 @@
+.form {
+	margin-top: 3rem;
+
+	&__container {
+		display: flex;
+		flex-direction: column;
+		width: 35rem;
+		height: 60rem;
+		margin: 0 auto;
+		background-color: $white-color;
+		border: 1px solid $secondary-color;
+
+		@include media-md {
+			width: 75rem;
+		}
+	}
+
+	&__header {
+		flex: 30%;
+		display: grid;
+		place-items: center;
+		text-transform: uppercase;
+	}
+
+	&__body {
+		flex: 50%;
+		flex-direction: column;
+
+		&-container {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
+	}
+
+	&__footer {
+		flex: 10%;
+		display: flex;
+		justify-content: center;
+		padding: 2rem 0;
+	}
+}
+
+input {
+	display: inline-block;
+	border: 1px solid $primary-color;
+	margin: 1.5rem;
+	width: 30rem;
+	height: 4rem;
+	padding-left: 0.5rem;
+	font-size: 2rem;
+	outline: none;
+}
+
+input:focus {
+	border: 1px solid $secondary-color;
+}
+
+.btn {
+	display: inline-block;
+	font-weight: 500;
+	font-size: 1.4rem;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	text-align: center;
+	padding: 2rem 5rem;
+	transition: all 0.7s ease-in;
+	cursor: pointer;
+	color: $white-color;
+	background: $dark-color;
+	border: 1px solid $white-color;
+}
+
+.btn:hover,
+.btn:visited,
+.btn:focus {
+	color: $white-color;
+	background: $secondary-color;
+	border: 1px solid $dark-color;
+}
+
+.btn:disabled {
+	background-color: $light-color;
+	cursor: not-allowed;
+}
+
+progress[value] {
+	-webkit-appearance: none;
+	appearance: none;
+	display: inline-block;
+	width: 35rem;
+	height: 1rem;
+	border-radius: 0.5rem;
+	@include media-md {
+		width: 75rem;
+	}
+}
+
+progress[value]::-webkit-progress-bar {
+	background-color: $white-color;
+	margin-bottom: 5rem;
+}
+
+progress[value]::-webkit-progress-value {
+	background-color: $secondary-color;
+}
+
+.final__text {
+	line-height: 3;
+	font-size: 2rem;
+	text-align: center;
+	color: $primary-color;
+}

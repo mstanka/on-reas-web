@@ -1,0 +1,23 @@
+.nav {
+	display: flex;
+	justify-items: center;
+	align-items: center;
+	width: 30rem;
+	margin: 3rem auto 0 auto;
+	padding-bottom: 3rem;
+
+	&__link {
+		flex: 10%;
+		cursor: pointer;
+		text-decoration: none;
+		color: $secondary-color;
+		padding: 0.7rem 2rem;
+		text-align: center;
+		border: 1px solid $secondary-color;
+		transition: all 0.7s ease-in;
+	}
+	&__link:hover {
+		color: $white-color;
+		border: 1px solid $white-color;
+	}
+}

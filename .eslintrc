@@ -1,0 +1,15 @@
+{
+	"plugins": ["react"],
+	"extends": ["eslint:recommended", "plugin:react/recommended"]
+	// "parserOptions": {
+	// 	"ecmaFeatures": {
+	// 		"jsx": true
+	// 	},
+	// 	"ecmaVersion": 7,
+	// 	"sourceType": "module"
+	// },
+	// "rules": {
+	// 	"react/react-in-jsx-scope": "off",
+	// 	"react/prop-types": "off"
+	// }
+}
