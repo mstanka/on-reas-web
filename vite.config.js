@@ -10,18 +10,18 @@ export default defineConfig({
 	},
 	build: {
 		rollupOptions: {
-		  external: ['/dist/assets/index.css'],
-		} 
+			external: ['/dist/assets/index.css'],
+		},
 	},
 	css: {
-        modules: {
+		modules: {
 			localsConvention: 'camelCase',
-            scopeBehaviour: 'global'
-        },
+			scopeBehaviour: 'global',
+		},
 		preprocessorOptions: {
 			style: {
-			  imports: [path.resolve(__dirname, '/index.css')]
-			}
-		 }
-    }
+				imports: [path.resolve(__dirname, '/index.css')],
+			},
+		},
+	},
 });
