@@ -3,7 +3,7 @@ import React from 'react';
 const Final = () => {
 	return (
 		<div className="final__text">
-			Děkujeme za zaslané informace. <br /> Během 48 hodin se vám ozveme na uvedený kontakt.
+			Děkujeme za zaslané informace. <br /> Během 24 hodin se vám ozveme na uvedený kontakt.
 		</div>
 	);
 };

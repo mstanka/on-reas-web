@@ -10,7 +10,7 @@ const Home = () => {
 			<div className="wrapper">
 				<section className="home">
 					<div className="home__text">
-						Vlasníte nemovitost a rádi byste ji pronajali nebo prodali? Vyplňte formulář a do 48 hodin vám pošleme nabídku.
+						Vlastníte nemovitost a rádi byste ji pronajali nebo prodali? Vyplňte formulář a do 24 hodin vám pošleme nabídku.
 					</div>
 					<Link to="/chci-nabidku" className="home__link">
 						{' '}

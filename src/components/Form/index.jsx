@@ -13,59 +13,79 @@ const Form = () => {
 		district: '',
 		fullName: '',
 		email: '',
-		phone: '+420',
-		other: '',
+		phone: '',
 	});
-	const [message, setMessage] = useState('');
+	const [message, setMessage] = useState({
+		email: '',
+		phone: '',
+		error: '',
+	});
 
-	const goNextStep = () => {
-		setStep((step) => step + 1);
+	const changeStep = () => {
+		if (step === 1) {
+			setStep((step) => step + 1);
+		}
+		if (step === 3) {
+			setStep(() => 1);
+		}
 	};
 
-	const validate = (email, phone) => {
-		if (email) {
-			if (!email.toLowerCase().match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
-				setMessage(() => 'Zadejte emailovou adresu');
-				return false;
+	const isFilled = (data) => {
+		let valid = true;
+		for (const item in data) {
+			if (item.length === 0) {
+				valid = false;
+				setStep(() => 1);
+				setMessage(() => [{ ...message, error: 'Vyplńte prosím všechna uvedená pole' }]);
+				break;
 			}
 		}
-		if (phone) {
-			if (!(phone.substring(0, 4) === '+420' && phone.length === 10)) {
-				setMessage(() => 'Zadejte telefonní číslo včetně předčíslí +420');
-				return false;
-			}
+		return valid;
+	};
+
+	const isValid = (email, phone) => {
+		const regExEmail =
+			/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+		const regExPhone = /^(\\+420)? ?[1-9][0-9]{2} ?[0-9]{3} ?[0-9]{3}$/;
+
+		if (!email.toLowerCase().match(regExEmail)) {
+			setMessage(() => [{ ...message, email: 'Zadejte emailovou adresu' }]);
+			return false;
+		}
+
+		if (!phone.match(regExPhone)) {
+			setMessage(() => [{ ...message, phone: 'Zadejte telefonní číslo včetně předčíslí +420' }]);
+			return false;
 		}
 
 		return true;
 	};
 
-	const submit = () => {
-		setStep((step) => step + 1);
-		validate(formData.email, formData.phone);
+	const submit = async () => {
+		isValid(formData.email, formData.phone);
+		isFilled(formData);
 
-		if (message) {
-			setStep(() => 2);
-			alert(message);
-		}
-		if (validate) {
-			fetch('http://localhost:3000/lead', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({
-					formData,
-				}),
+		// if (isFilled && isValid) {
+		fetch('http://localhost:3000/lead', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				...formData,
+			}),
+		})
+			.then((response) => {
+				if (!response.ok) {
+					throw new Error('Network response was not OK');
+				}
 			})
-				.then((response) => {
-					if (!response.ok) {
-						throw new Error('Network response was not OK');
-					}
-				})
-				.catch((error) => {
-					console.error('There has been a problem with your fetch operation:', error);
-				});
-		}
+			.catch((error) => {
+				console.error('There has been a problem with your fetch operation:', error);
+			});
+
+		setStep((step) => step + 1);
+		// }
 	};
 
 	return (
@@ -76,8 +96,16 @@ const Form = () => {
 					<div className="form__container">
 						<progress max="3" value={step} />
 						<div className="form__header">
-							{step === 1 && <h1>Nemovitost</h1>}
-							{step === 2 && <h1>Osobní údaje</h1>}
+							{step === 1 && (
+								<>
+									<h1 className="form__header-title">Nemovitost</h1> <small>Vyplňte prosím všechna uvedená pole</small>
+								</>
+							)}
+							{step === 2 && (
+								<>
+									<h1 className="form__header-title">Osobní údaje</h1> <small>Vyplňte prosím všechna uvedená pole</small>
+								</>
+							)}
 						</div>
 						<div className="form__body">
 							{step === 1 && <Estate formData={formData} setFormData={setFormData} />}
@@ -88,13 +116,18 @@ const Form = () => {
 						<div className="form__footer">
 							<div className="form__footer-container">
 								{step === 1 && (
-									<button className="btn" onClick={goNextStep}>
+									<button className="btn" onClick={changeStep}>
 										Další
 									</button>
 								)}
 								{step === 2 && (
 									<button type="submit" className="btn" onClick={submit}>
 										Odeslat
+									</button>
+								)}
+								{step === 3 && (
+									<button className="btn" onClick={changeStep}>
+										Zpět
 									</button>
 								)}
 							</div>

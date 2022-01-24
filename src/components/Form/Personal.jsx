@@ -15,12 +15,14 @@ const Personal = ({ formData, setFormData }) => {
 				value={formData.email}
 				onChange={(event) => setFormData({ ...formData, email: event.target.value })}
 			/>
+			{/* {message && <div className="message">{message.email}</div>} */}
 			<input
 				type="text"
-				placeholder="Telefon..."
+				placeholder="Telefon... (včetně +420)"
 				value={formData.phone}
 				onChange={(event) => setFormData({ ...formData, phone: event.target.value })}
 			/>
+			{/* {message && <div className="message">{message.phone}</div>} */}
 		</div>
 	);
 };

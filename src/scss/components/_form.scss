@@ -16,10 +16,17 @@
 	}
 
 	&__header {
+		display: flex;
+		flex-direction: column;
 		flex: 30%;
-		display: grid;
-		place-items: center;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
 		text-transform: uppercase;
+
+		&-title {
+			padding-bottom: 2rem;
+		}
 	}
 
 	&__body {
@@ -110,5 +117,11 @@ progress[value]::-webkit-progress-value {
 	line-height: 3;
 	font-size: 2rem;
 	text-align: center;
+	padding: 0 .5rem;
 	color: $primary-color;
+}
+
+.message {
+	font-size: 1rem;
+	color: $secondary-color;
 }
