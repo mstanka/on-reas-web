@@ -66,7 +66,8 @@ const Form = () => {
 		isFilled(formData);
 
 		// if (isFilled && isValid) {
-		fetch('http://localhost:3000/lead', {
+		// URL_LOCAL=http://localhost:3000/lead
+		fetch('https://on-reas-api.herokuapp.com/lead', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
